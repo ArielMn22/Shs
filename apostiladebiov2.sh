@@ -28,4 +28,4 @@ else
 fi
 
 echo 'Seu resultado é:'
-echo $(($NUM*100/$VALOR))
+echo "scale=2;$NUM*100/$VALOR"|bc
