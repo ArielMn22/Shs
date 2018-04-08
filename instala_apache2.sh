@@ -1,4 +1,5 @@
 #!/bin/bash
+
 clear
 echo "apt-get update && apt-get install apache2 -y"
 apt-get update && apt-get install apache2 -y

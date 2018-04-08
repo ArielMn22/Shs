@@ -1,4 +1,7 @@
 #!/bin/bash
+# Script criado para resolução de uma tarefa de Biologia do Ensino Médio haha
+# By ArielMn22
+
 clear
 echo 'Digite um número: '
 read NUM

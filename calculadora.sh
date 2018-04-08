@@ -1,4 +1,7 @@
 #!/bin/bash
+# CALCULADORA_SIMPLES
+# Um de meus primeiros scripr em shell script
+# By ArielMn22 (arielpaixao10@gmail.com)
 
 clear 						#Limpa a tela
 
