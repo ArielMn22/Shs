@@ -18,7 +18,7 @@ iptables -A OUTPUT -o lo -j ACCEPT
 
 # LIBERAR O ACESSO SSH DO FIREWALL
 iptables -A INPUT -p tcp -d 172.31.100.254 --dport 2222 -j ACCEPT
-iptables -A OUTPUT -p tcp -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 2222 -j ACCEPT
 
 # LIBERAR O ICMP PARA TODO CENARIO
 iptables -A INPUT -p icmp -j ACCEPT
