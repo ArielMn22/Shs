@@ -36,8 +36,12 @@
 	iptables -A OUTPUT -p tcp -o eth2 --sport 2222 -j ACCEPT
 
 # LIBERAR PROTOCOLO DNS
-	iptables -A INPUT -p udp --dport 53 -j ACCEPT
-	iptables -A OUTPUT -p udp --sport 53 -j ACCEPT
+	# iptables -A INPUT -p udp --dport 53 -j ACCEPT
+	# iptables -A OUTPUT -p udp --sport 53 -j ACCEPT
+	iptables -A FORWARD -p udp --dport 53 -j ACCEPT
+	iptables -A FORWARD -p udp --sport 53 -j ACCEPT
+	iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
+	iptables -A INPUT -p udp --sport 53 -j ACCEPT
 
 # LIBERAR REPOSITÓRIO LINUX (APT UPDATE)
 	iptables -A FORWARD -d ftp.debian.org -j ACCEPT
