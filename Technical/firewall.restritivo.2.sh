@@ -40,6 +40,10 @@
 	iptables -A OUTPUT -p udp --sport 53 -j ACCEPT
 
 # LIBERAR REPOSITÓRIO LINUX (APT UPDATE)
-	#TODO - Allow http, ftp and udp
+	iptables -A FORWARD -d ftp.debian.org -j ACCEPT
+	iptables -A FORWARD -s ftp.debian.org -j ACCEPT
+	iptables -A OUTPUT -d ftp.debian.org -j ACCEPT
+	iptables -A INPUT -s ftp.debian.org -j ACCEPT
+
 clear
 iptables -L -nv --line-numbers
