@@ -51,8 +51,17 @@
 	iptables -A OUTPUT -d ftp.debian.org -j ACCEPT
 	iptables -A INPUT -s ftp.debian.org -j ACCEPT
 
-#Dropar "ICMP" do SRVWEB-DENVER para CLIENTE, quando for acionado gere log dizendo "Acesso ao Cliente bloqueado"
+# LIBERAR PROTOCOLO FTP
+	iptables -A INPUT -p tcp --match multiport --dport 20,21 -j ACCEPT	
+	iptables -A INPUT -p tcp --match multiport --dport 20,21 -j ACCEPT	
+
+# Dropar "ICMP" do SRVWEB-DENVER para CLIENTE, quando for acionado gere log dizendo "Acesso ao Cliente bloqueado"
 	iptables -A FORWARD -p icmp -s 172.31.100.253 -d 10.10.100.1 -j DROP
+	iptables -A FORWARD -p icmp -s 10.10.100.1 -d 172.31.100.253 -j DROP
+
+# LIBERAR COMPARTILHAMENTO DE ARQUIVOS DO SRVDV-NAIROBI SOMENTE PARA O CLIENTE
+	iptables -A FORWARD -p tcp -s 172.31.100.252 --match multiport --dport 20,21 -j DROP
+	iptables -A FORWARD -p tcp -s 172.31.100.252 -d 10.10.100.1 --match multiport --dport 20,21 -j ACCEPT
 
 clear
 iptables -L -nv --line-numbers
