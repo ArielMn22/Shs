@@ -54,6 +54,10 @@
 # LIBERAR PROTOCOLO FTP
 	iptables -A INPUT -p tcp --match multiport --dport 20,21 -j ACCEPT	
 	iptables -A INPUT -p tcp --match multiport --dport 20,21 -j ACCEPT	
+	iptables -A OUTPUT -p tcp --match multiport --dport 20,21 -j ACCEPT	
+	iptables -A OUTPUT -p tcp --match multiport --sport 20,21 -j ACCEPT	
+	iptables -A FORWARD -p tcp --match multiport --dport 20,21 -j ACCEPT	
+	iptables -A FORWARD -p tcp --match multiport --sport 20,21 -j ACCEPT	
 
 # Dropar "ICMP" do SRVWEB-DENVER para CLIENTE, quando for acionado gere log dizendo "Acesso ao Cliente bloqueado"
 	iptables -A FORWARD -p icmp -s 172.31.100.253 -d 10.10.100.1 -j DROP
