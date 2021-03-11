@@ -36,8 +36,10 @@
 	iptables -A OUTPUT -p tcp -o eth2 --sport 2222 -j ACCEPT
 
 # LIBERAR PROTOCOLO DNS
+	# region WRONG APPROACH
 	# iptables -A INPUT -p udp --dport 53 -j ACCEPT
 	# iptables -A OUTPUT -p udp --sport 53 -j ACCEPT
+	# endregion
 	iptables -A FORWARD -p udp --dport 53 -j ACCEPT
 	iptables -A FORWARD -p udp --sport 53 -j ACCEPT
 	iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
@@ -48,6 +50,9 @@
 	iptables -A FORWARD -s ftp.debian.org -j ACCEPT
 	iptables -A OUTPUT -d ftp.debian.org -j ACCEPT
 	iptables -A INPUT -s ftp.debian.org -j ACCEPT
+
+#Dropar "ICMP" do SRVWEB-DENVER para CLIENTE, quando for acionado gere log dizendo "Acesso ao Cliente bloqueado"
+	iptables -A FORWARD -p icmp -s 172.31.100.253 -d 10.10.100.1 -j DROP
 
 clear
 iptables -L -nv --line-numbers
