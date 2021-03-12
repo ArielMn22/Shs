@@ -11,6 +11,12 @@ awaitInput() {
 
 clear
 
+echo "====================="
+echo "IPTABLES CONFIGURATOR"
+echo "====================="
+echo -e "Aperte [ENTER] para executar cada etapa passo-a-passo\n"
+read -p ""
+
 # A) POLÍTICA RESTRITIVA
 iptables -P INPUT DROP
 iptables -P OUTPUT DROP
