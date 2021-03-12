@@ -66,6 +66,8 @@ iptables -A FORWARD -p tcp -s 172.31.100.253 --match multiport --dport 80,443 -j
 iptables -A FORWARD -p tcp -d 172.31.100.253 --match multiport --dport 80,443 -j DROP
 iptables -A FORWARD -p tcp --match multiport --dport 80,443 -j ACCEPT
 iptables -A INPUT -p tcp --match multiport --dport 80,443 -j ACCEPT
+iptables -A INPUT -p tcp --match multiport --sport 80,443 -j ACCEPT
+iptables -A OUTPUT -p tcp --match multiport --dport 80,443 -j ACCEPT
 iptables -A OUTPUT -p tcp --match multiport --sport 80,443 -j ACCEPT
 MESSAGE="Liberar navegação para todos dispositivos exceto SRVWEB-DENVER - OK!"
 awaitInput
