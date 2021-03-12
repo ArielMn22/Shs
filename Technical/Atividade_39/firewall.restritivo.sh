@@ -23,6 +23,12 @@ iptables -F
 MESSAGE="Chains limpas - OK!"
 awaitInput
 
+# D) REJEITAR "ICMP" DO CLIENTE PARA SRVFW-BERLIM, GERANDO LOG QUANDO ACIONADO
+iptables -A INPUT -p icmp -s 10.10.100.1 -j LOG --log-prefix "ICMP do Cliente para SRVFW-BERLIM bloqueado"
+iptables -A INPUT -p icmp -s 10.10.100.1 -j REJECT
+MESSAGE="ICMP do cliente para srvfw-berlim bloqueado - OK!"
+awaitInput
+
 # B) LIBERAR ICMP
 iptables -A INPUT -p icmp -j ACCEPT
 iptables -A OUTPUT -p icmp -j ACCEPT
@@ -53,12 +59,6 @@ iptables -A FORWARD -s ftp.br.debian.org -j ACCEPT
 iptables -A OUTPUT -d ftp.br.debian.org -j ACCEPT
 iptables -A INPUT -s ftp.br.debian.org -j ACCEPT
 MESSAGE="Repositório liberado - OK!"
-awaitInput
-
-# D) REJEITAR "ICMP" DO CLIENTE PARA SRVFW-BERLIM, GERANDO LOG QUANDO ACIONADO
-iptables -A INPUT -p icmp -s 10.10.100.1 -j LOG --log-prefix "ICMP do Cliente para SRVFW-BERLIM bloqueado"
-iptables -A INPUT -p icmp -s 10.10.100.1 -j REJECT
-MESSAGE="ICMP do cliente para srvfw-berlim bloqueado - OK!"
 awaitInput
 
 # E) LIBERAR ACESSO A INTERNET (NAVEGAÇÃO); EXCETO SRVWEB-DENVER
